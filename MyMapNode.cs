@@ -100,7 +100,7 @@ namespace HashTable
                     }
                 }
             }
-            Console.WriteLine("The frequency of " + value + "is:" + count);
+            Console.WriteLine("The frequency of " + value + "is : " + count);
             return count;
         }
     }
