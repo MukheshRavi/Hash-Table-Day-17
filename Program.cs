@@ -18,6 +18,8 @@ namespace HashTable
             }
             myMapNode.Display();
             myMapNode.Frequency("paranoid");
+            myMapNode.RemoveElement("avoidable");
+            myMapNode.Display();
           
            
             
