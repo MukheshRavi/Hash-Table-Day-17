@@ -103,5 +103,25 @@ namespace HashTable
             Console.WriteLine("The frequency of " + value + "is : " + count);
             return count;
         }
+       
+
+        public void RemoveElement(V value)
+        {
+             foreach (var linkedList in items)
+             {
+                 if (linkedList != null)
+                 {
+                     foreach (var element in linkedList)
+                     {
+                        if (element.Value.Equals(value))
+                        {
+                            linkedList.Remove(element);
+                            break;
+                        }
+                     }
+                 }
+             }
+
+        }
     }
 }
