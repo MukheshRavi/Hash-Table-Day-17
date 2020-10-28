@@ -44,6 +44,8 @@ namespace HashTable
             LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
             KeyValue<K, V> item = new KeyValue<K, V>()
             { Key = key, Value = value };
+            ///If element already present then it will not add in hash table
+            if(!ElementPresent(key))
             linkedList.AddLast(item);
             Console.WriteLine(item.Key + " " + item.Value);
 
@@ -86,7 +88,7 @@ namespace HashTable
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public int Frequency(V value)
+        public int Frequency(K key)
         {
             int count = 0;
             foreach (var linkedList in items)
@@ -95,17 +97,37 @@ namespace HashTable
                 {
                     foreach (var element in linkedList)
                     {
-                        if (element.Value.Equals(value))
+                        if (element.Key.Equals(key))
                             count++;
                     }
                 }
             }
-            Console.WriteLine("The frequency of " + value + "is : " + count);
+            Console.WriteLine("The frequency of " + key + "is : " + count);
             return count;
         }
-       
-
-        public void RemoveElement(V value)
+        /// <summary>
+        /// This methods returns true if element already present
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool ElementPresent(K key)
+        {
+            int hash = key.GetHashCode();
+            int position = hash % size;
+            foreach (var element in items[Math.Abs(position)])
+            {
+                if (element.Key.Equals(key))
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+        /// <summary>
+        /// This method searches for a element based on key and later deletes that element
+        /// </summary>
+        /// <param name="key"></param>
+        public void RemoveElement(K key)
         {
              foreach (var linkedList in items)
              {
@@ -113,7 +135,7 @@ namespace HashTable
                  {
                      foreach (var element in linkedList)
                      {
-                        if (element.Value.Equals(value))
+                        if (element.Key.Equals(key))
                         {
                             linkedList.Remove(element);
                             break;
